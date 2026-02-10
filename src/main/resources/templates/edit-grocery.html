@@ -19,11 +19,13 @@
 
     <p>
         <label>Purchased:</label>
-        <input type="checkbox" name="purchased"
+
+        <input type="hidden" name="purchased" value="false">
+        <input type="checkbox" name="purchased" value="true"
                th:checked="${grocery.purchased}">
     </p>
 
-    <button type="submit">Updategrocery list</button>
+    <button type="submit">Update grocery list</button>
 
 </form>
 
