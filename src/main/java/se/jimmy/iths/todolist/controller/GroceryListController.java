@@ -15,8 +15,8 @@ public class GroceryListController {
     }
 
     @GetMapping
-    public String groceries(Model model) {
-        model.addAttribute("items", service.getAllGroceries());
+    public String getAllGroceries(Model model) {
+        model.addAttribute("groceries", groceryListService.getAllGroceries());
         return "groceries";
     }
 
@@ -27,32 +27,32 @@ public class GroceryListController {
 
     @PostMapping
     public String createGrocery(@ModelAttribute GroceryList groceryList) {
-        groceryListService.save(groceryList);
+        GroceryList groceryList2 = groceryListService.createGrocery(groceryList);
         return "redirect:/groceries";
     }
 
     @GetMapping("/{id}")
     public String getGrocery(@PathVariable Long id, Model model) {
-        model.addAttribute("grocery", groceryListService.findById(id));
+        model.addAttribute("grocery", groceryListService.getGrocery(id));
         return "grocery";
     }
 
     @PutMapping("/{id}")
     public String updateGrocery(@PathVariable Long id, @ModelAttribute GroceryList groceryList) {
-        groceryListService.update(id, groceryList);
+        groceryListService.updateGrocery(id, groceryList);
         return "redirect:/groceries";
     }
 
     @GetMapping("/{id}/edit")
     public String showUpdateForm(@PathVariable Long id, Model model) {
-        GroceryList grocery = groceryListService.findById(id);
-        model.addAttribute("grocery", grocery);
+        GroceryList groceryList = groceryListService.getGrocery(id);
+        model.addAttribute("grocery", groceryList);
         return "edit-grocery";
     }
 
     @DeleteMapping("/{id}")
     public String deleteGrocery(@PathVariable Long id) {
-        groceryListService.delete(id);
+        groceryListService.deleteGroceries(id);
         return "redirect:/groceries";
     }
 }
