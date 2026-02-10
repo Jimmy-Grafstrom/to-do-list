@@ -52,7 +52,7 @@ public class GroceryListController {
 
     @DeleteMapping("/{id}")
     public String deleteGrocery(@PathVariable Long id) {
-        groceryListService.deleteGroceries(id);
+        groceryListService.deleteGrocery(id);
         return "redirect:/groceries";
     }
 }
