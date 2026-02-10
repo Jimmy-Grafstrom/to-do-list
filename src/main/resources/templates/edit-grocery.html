@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update grocerylist</title>
+</head>
+<body>
+
+<h1>Update grocery list</h1>
+
+<form method="post" th:action="@{/groceries/{id}(id=${grocery.id})}">
+    <input type="hidden" name="_method" value="PUT">
+
+    <p>
+        <label>Name:</label>
+        <input type="text" name="name"
+               th:value="${grocery.name}">
+    </p>
+
+    <p>
+        <label>Purchased:</label>
+        <input type="checkbox" name="purchased"
+               th:checked="${grocery.purchased}">
+    </p>
+
+    <button type="submit">Updategrocery list</button>
+
+</form>
+
+</body>
+</html>

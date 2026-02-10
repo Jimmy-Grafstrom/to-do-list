@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grocery</title>
+</head>
+<body>
+
+<h1>Information</h1>
+
+<span th:text="${grocery.name}">Grocery name</span>
+-
+<span th:text="${grocery.purchased ? 'Purchased' : 'Not purchased'}"></span>
+
+</body>
+</html>
