@@ -13,6 +13,7 @@ public class GroceryList {
     private Long id;
     private String name;
     private int quantity;
+    private String category;
     private boolean purchased;
 
     public GroceryList() {
@@ -41,6 +42,14 @@ public class GroceryList {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public boolean isPurchased() {
