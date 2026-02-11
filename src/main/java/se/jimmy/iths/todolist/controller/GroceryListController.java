@@ -27,7 +27,7 @@ public class GroceryListController {
 
     @PostMapping
     public String createGrocery(@ModelAttribute GroceryList groceryList) {
-        GroceryList groceryList2 = groceryListService.createGrocery(groceryList);
+        groceryListService.createGrocery(groceryList);
         return "redirect:/groceries";
     }
 
@@ -45,8 +45,7 @@ public class GroceryListController {
 
     @GetMapping("/{id}/edit")
     public String showUpdateForm(@PathVariable Long id, Model model) {
-        GroceryList groceryList = groceryListService.getGrocery(id);
-        model.addAttribute("grocery", groceryList);
+        model.addAttribute("grocery", groceryListService.getGrocery(id));
         return "edit-grocery";
     }
 

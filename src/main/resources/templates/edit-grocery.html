@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update grocerylist</title>
+    <title>Update grocery</title>
 </head>
 <body>
 
-<h1>Update grocery list</h1>
+<h1>Update grocery</h1>
 
-<form method="post" th:action="@{/groceries/{id}(id=${grocery.id})}">
+<form method="post" th:object="${grocery}" th:action="@{/groceries/{id}(id=${grocery.id})}">
     <input type="hidden" name="_method" value="PUT">
+
 
     <p>
         <label>Name:</label>
@@ -18,14 +19,25 @@
     </p>
 
     <p>
-        <label>Purchased:</label>
-
-        <input type="hidden" name="purchased" value="false">
-        <input type="checkbox" name="purchased" value="true"
-               th:checked="${grocery.purchased}">
+        <label>Quantity:</label>
+        <input type="number" name="quantity"
+               th:value="${grocery.quantity}">
     </p>
 
-    <button type="submit">Update grocery list</button>
+    <p>
+        <label>Category:</label>
+        <input type="text" name="category"
+               th:value="${grocery.category}">
+    </p>
+
+    <p>
+        <label>Purchased:</label>
+
+        <input type="checkbox"
+               th:field="*{purchased}">
+    </p>
+
+    <button type="submit">Update</button>
 
 </form>
 

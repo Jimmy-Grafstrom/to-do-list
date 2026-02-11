@@ -8,9 +8,14 @@
 
 <h1>Information</h1>
 
-<span th:text="${grocery.name}">Grocery name</span>
--
-<span th:text="${grocery.purchased ? 'Purchased' : 'Not purchased'}"></span>
+<p>Name: <span th:text="${grocery.name}"></span></p>
+<p>Quantity: <span th:text="${grocery.quantity}"></span></p>
+<p>Category: <span th:text="${grocery.category}"></span></p>
+<p>Status:
+    <span th:text="${grocery.purchased ? 'Purchased' : 'Not purchased'}"></span>
+</p>
+
+<a th:href="@{/groceries}">Back</a>
 
 </body>
 </html>
