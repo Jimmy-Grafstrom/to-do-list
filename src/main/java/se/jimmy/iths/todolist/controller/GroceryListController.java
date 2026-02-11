@@ -3,6 +3,8 @@ package se.jimmy.iths.todolist.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import se.jimmy.iths.todolist.model.GroceryList;
+import se.jimmy.iths.todolist.service.GroceryListService;
 
 @Controller
 @RequestMapping("/groceries")
