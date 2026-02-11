@@ -8,18 +8,21 @@ import java.util.List;
 public class GroceryListService {
 
     private final GroceryListRepository groceryListRepository;
-    //private final GroceryListValidator groceryListValidator;
+    private final GroceryListValidator groceryListValidator;
 
-    public GroceryListService(GroceryListRepository groceryListRepository) {
+    public GroceryListService(GroceryListRepository groceryListRepository, GroceryListValidator groceryListValidator) {
         this.groceryListRepository = groceryListRepository;
+        this.groceryListValidator = groceryListValidator;
 
     }
+
 
     public List<GroceryList> getAllGroceries() {
         return groceryListRepository.findAll();
     }
 
     public GroceryList createGrocery(GroceryList groceryList) {
+        groceryListValidator.validate(groceryList);
         return groceryListRepository.save(groceryList);
     }
 
@@ -29,13 +32,22 @@ public class GroceryListService {
     }
 
 
-    public GroceryList updateGrocery(Long id, GroceryList groceryList) {
-        groceryList.setId(id);
-        return groceryListRepository.save(groceryList);
+    public GroceryList updateGrocery(Long id, GroceryList groceryListupdate) {
+        GroceryList existing = getGrocery(id);
+
+        groceryListValidator.validate(groceryListupdate);
+
+        existing.setName(groceryListupdate.getName());
+        existing.setQuantity(groceryListupdate.getQuantity());
+        existing.setCategory(groceryListupdate.getCategory());
+        existing.setPurchased(groceryListupdate.isPurchased());
+
+        return groceryListRepository.save(existing);
     }
 
     public void deleteGrocery(Long id) {
-        groceryListRepository.deleteById(id);
+        GroceryList existing = getGrocery(id);
+        groceryListRepository.delete(existing);
 
     }
 
