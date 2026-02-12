@@ -1,6 +1,6 @@
 CREATE TABLE grocery_list
 (
-    id        BIGSERIAL PRIMARY KEY,
+    id        BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name      VARCHAR(255) NOT NULL,
     quantity  INT          NOT NULL,
     category  VARCHAR(255),
