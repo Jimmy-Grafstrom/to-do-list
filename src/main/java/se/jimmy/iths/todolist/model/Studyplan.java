@@ -2,7 +2,6 @@ package se.jimmy.iths.todolist.model;
 
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 
@@ -11,7 +10,7 @@ public class Studyplan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private String Task;
     private int priority;
@@ -34,7 +33,8 @@ public class Studyplan {
 
     //--- Getters ---
 
-    public int getId() {
+    public long getId() {
+
         return id;
     }
     public String getTask(){
@@ -54,7 +54,7 @@ public class Studyplan {
     }
 
     //--- Setters ---
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
     public void setTask(String Task) {
