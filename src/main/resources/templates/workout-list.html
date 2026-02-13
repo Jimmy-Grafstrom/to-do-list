@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workout Sessions</title>
+</head>
+<body>
+    <h1>Workout Sessions</h1>
+    <a th:href="@{/workout/new}">Add New Workout</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Exercise Type</th>
+                <th>Duration (min)</th>
+                <th>Intensity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="workout : ${workoutSessions}">
+                <td th:text="${workout.date}"></td>
+                <td th:text="${workout.exerciseType}"></td>
+                <td th:text="${workout.durationInMinutes}"></td>
+                <td th:text="${workout.intensity}"></td>
+                <td>
+                    <a th:href="@{/workout/{id}(id=${workout.id})}">Details</a>
+                    <a th:href="@{/workout/{id}/edit(id=${workout.id})}">Update</a>
+                    <form th:action="@{/workout/{id}(id=${workout.id})}" th:method="delete" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
