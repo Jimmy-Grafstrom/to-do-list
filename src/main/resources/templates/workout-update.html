@@ -8,20 +8,20 @@
     <h1>Update Workout</h1>
     <form th:action="@{/workout/update/{id}(id=${workoutSession.id})}" th:object="${workoutSession}" th:method="put">
         <div>
-            <label>Date:</label>
-            <input type="date" th:field="*{date}" required />
+            <label for="date">Date:</label>
+            <input type="date" id="date" th:field="*{date}" required />
         </div>
         <div>
-            <label>Exercise Type:</label>
-            <input type="text" th:field="*{exerciseType}" required />
+            <label for="exerciseType">Exercise Type:</label>
+            <input type="text" id="exerciseType" th:field="*{exerciseType}" required />
         </div>
         <div>
-            <label>Duration (minutes):</label>
-            <input type="number" th:field="*{durationInMinutes}" min="1" required />
+            <label for="durationInMinutes">Duration (minutes):</label>
+            <input type="number" id="durationInMinutes" th:field="*{durationInMinutes}" min="1" required />
         </div>
         <div>
-            <label>Intensity (1-10):</label>
-            <input type="number" th:field="*{intensity}" min="1" max="10" required />
+            <label for="intensity">Intensity (1-10):</label>
+            <input type="number" id="intensity" th:field="*{intensity}" min="1" max="10" required />
         </div>
         <button type="submit">Update</button>
     </form>
