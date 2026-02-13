@@ -1,0 +1,117 @@
+package se.jimmy.iths.todolist.service;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import se.jimmy.iths.todolist.model.WorkoutSession;
+import se.jimmy.iths.todolist.repository.WorkoutSessionRepository;
+import se.jimmy.iths.todolist.validator.WorkoutSessionValidator;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+class WorkoutSessionServiceTest {
+
+    @Mock
+    private WorkoutSessionRepository repository;
+
+    @Mock
+    private WorkoutSessionValidator validator;
+
+    @InjectMocks
+    private WorkoutSessionService service;
+
+    private List<WorkoutSession> workoutSessions;
+
+    private WorkoutSession newSession;
+
+    @BeforeEach
+    void setUp() {
+
+        newSession = new WorkoutSession("Cycling", 50, 8, LocalDate.now());
+
+        WorkoutSession session1 = new WorkoutSession("Gym", 30, 3, LocalDate.now());
+        session1.setId(1L);
+
+        WorkoutSession session2 = new WorkoutSession("Running", 60, 6, LocalDate.now().minusDays(1L));
+        session2.setId(2L);
+
+        WorkoutSession session3 = new WorkoutSession("Dance", 45, 5, LocalDate.now().minusDays(2L));
+        session3.setId(3L);
+
+        workoutSessions = List.of(session1, session2, session3);
+    }
+
+    @Test
+    void getAllWorkoutSessions_ShouldReturnListOfSessions() {
+        when(repository.findAll()).thenReturn(workoutSessions);
+
+        List<WorkoutSession> result = service.getAllWorkoutSessions();
+
+        assertEquals(3, result.size());
+        assertEquals(2L, result.get(1).getId());
+        assertEquals("Dance", result.getLast().getExerciseType());
+    }
+
+    @Test
+    void getById_ShouldReturnWorkoutSession() {
+        Long id = 4L;
+        newSession.setId(id);
+        when(repository.findById(id)).thenReturn(Optional.ofNullable(newSession));
+
+        WorkoutSession result = service.getById(id);
+
+        assertNotNull(result);
+        assertEquals("Cycling", result.getExerciseType());
+        assertEquals(4L, result.getId());
+    }
+
+    @Test
+    void create_ShouldReturnWorkoutSession() {
+        when(repository.save(any(WorkoutSession.class))).thenReturn(newSession);
+
+        WorkoutSession result = service.create(newSession);
+
+        verify(validator).validate(newSession);
+        verify(repository).save(newSession);
+        assertNotNull(result);
+        assertEquals("Cycling", result.getExerciseType());
+    }
+
+    @Test
+    void update_ShouldUpdateAndSaveSession() {
+        WorkoutSession existingSession = workoutSessions.getFirst();
+
+        when(repository.findById(1L)).thenReturn(Optional.of(existingSession));
+        when(repository.save(any(WorkoutSession.class))).thenAnswer(i -> i.getArguments()[0]);
+
+        WorkoutSession result = service.update(newSession, 1L);
+
+        assertEquals("Cycling", result.getExerciseType());
+        assertEquals(1L, result.getId());
+
+        verify(validator).validate(existingSession);
+        verify(repository).save(existingSession);
+    }
+
+    @Test
+    void delete_ShouldDelete_WhenIdExists() {
+        Long id = 1L;
+        when(repository.findById(id)).thenReturn(Optional.of(workoutSessions.getFirst()));
+
+        service.delete(id);
+
+        verify(repository).deleteById(id);
+    }
+}
