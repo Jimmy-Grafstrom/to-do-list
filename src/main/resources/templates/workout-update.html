@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Workout</title>
+</head>
+<body>
+    <h1>Update Workout</h1>
+    <form th:action="@{/workout/update/{id}(id=${workoutSession.id})}" th:object="${workoutSession}" th:method="put">
+        <div>
+            <label>Date:</label>
+            <input type="date" th:field="*{date}" required />
+        </div>
+        <div>
+            <label>Exercise Type:</label>
+            <input type="text" th:field="*{exerciseType}" required />
+        </div>
+        <div>
+            <label>Duration (minutes):</label>
+            <input type="number" th:field="*{durationInMinutes}" min="1" required />
+        </div>
+        <div>
+            <label>Intensity (1-10):</label>
+            <input type="number" th:field="*{intensity}" min="1" max="10" required />
+        </div>
+        <button type="submit">Update</button>
+    </form>
+    <br>
+    <a th:href="@{/workout}">Cancel</a>
+</body>
+</html>

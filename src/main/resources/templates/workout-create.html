@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Workout</title>
+</head>
+<body>
+    <h1>Create New Workout</h1>
+    <form th:action="@{/workout/new}" th:object="${workoutSession}" method="post">
+        <div>
+            <label>Date:</label>
+            <input type="date" th:field="*{date}" required />
+        </div>
+        <div>
+            <label>Exercise Type:</label>
+            <input type="text" th:field="*{exerciseType}" required />
+        </div>
+        <div>
+            <label>Duration (minutes):</label>
+            <input type="number" th:field="*{durationInMinutes}" min="1" required />
+        </div>
+        <div>
+            <label>Intensity (1-10):</label>
+            <input type="number" th:field="*{intensity}" min="1" max="10" value="1" required />
+        </div>
+        <button type="submit">Create</button>
+    </form>
+    <br>
+    <a th:href="@{/workout}">Cancel</a>
+</body>
+</html>
