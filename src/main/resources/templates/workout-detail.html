@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workout Detail</title>
+</head>
+<body>
+    <h1>Workout Detail</h1>
+    <p><strong>ID:</strong> <span th:text="${workoutSession.id}"></span></p>
+    <p><strong>Date:</strong> <span th:text="${workoutSession.date}"></span></p>
+    <p><strong>Exercise Type:</strong> <span th:text="${workoutSession.exerciseType}"></span></p>
+    <p><strong>Duration (min):</strong> <span th:text="${workoutSession.durationInMinutes}"></span></p>
+    <p><strong>Intensity:</strong> <span th:text="${workoutSession.intensity}"></span></p>
+    <br>
+    <a th:href="@{/workout}">Back to List</a>
+    <a th:href="@{/workout/{id}/edit(id=${workoutSession.id})}">Edit</a>
+</body>
+</html>
