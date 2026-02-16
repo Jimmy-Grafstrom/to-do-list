@@ -28,7 +28,7 @@ public class Studyplan {
         this.priority = priority;
         this.coursename = coursename;
         this.startdate = startdate;
-        this.deadline = startdate.plusWeeks(2);
+        this.deadline = deadline;
     }
 
     //--- Getters ---
