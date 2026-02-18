@@ -31,6 +31,9 @@ To run the application in production (e.g., on Koyeb), the following environment
 * `DB_USERNAME`: Database username.
 * `DB_PASSWORD`: Database password.
 
+When cloning this repository make sure to open the settings for environment variables in your IDE, and use the variables above to connect to your own database environment.  
+H2-database is used for testing. The '.properties' file for testing is already preconfigured.
+
 ## Getting Started Locally
 1. Clone the repository.
 2. Build and run the project using Maven:
