@@ -1,5 +1,7 @@
 package se.jimmy.iths.todolist.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import se.jimmy.iths.todolist.exceptions.WorkoutSessionNotFoundException;
 import se.jimmy.iths.todolist.model.WorkoutSession;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Service
 public class WorkoutSessionService {
+
+    private static final Logger logger = LoggerFactory.getLogger(WorkoutSessionService.class);
 
     private final WorkoutSessionRepository workoutSessionRepository;
     private final WorkoutSessionValidator validator;
@@ -24,7 +28,10 @@ public class WorkoutSessionService {
     }
 
     public WorkoutSession getById(Long id) {
-        return workoutSessionRepository.findById(id).orElseThrow(() -> new WorkoutSessionNotFoundException("Session not found"));
+        return workoutSessionRepository.findById(id).orElseThrow(() -> {
+            logger.error("WorkoutSession with id {} not found", id);
+            return new WorkoutSessionNotFoundException("Session not found");
+        });
     }
 
     public WorkoutSession create(WorkoutSession workoutSession) {
@@ -43,7 +50,12 @@ public class WorkoutSessionService {
     }
 
     public void delete(Long id) {
-        getById(id);
-        workoutSessionRepository.deleteById(id);
+        try {
+            getById(id);
+            workoutSessionRepository.deleteById(id);
+        } catch (WorkoutSessionNotFoundException e) {
+            logger.error("Delete failed: ID {} not found", id);
+            throw e;
+        }
     }
 }

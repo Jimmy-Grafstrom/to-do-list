@@ -1,5 +1,7 @@
 package se.jimmy.iths.todolist.validator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import se.jimmy.iths.todolist.exceptions.WorkoutSessionValidationException;
 import se.jimmy.iths.todolist.model.WorkoutSession;
@@ -9,11 +11,18 @@ import java.time.LocalDate;
 @Component
 public class WorkoutSessionValidator {
 
+    private static final Logger logger = LoggerFactory.getLogger(WorkoutSessionValidator.class);
+
     public void validate(WorkoutSession workoutSession) {
-        validateExerciseType(workoutSession.getExerciseType());
-        validateDuration(workoutSession.getDurationInMinutes());
-        validateIntensity(workoutSession.getIntensity());
-        validateDate(workoutSession.getDate());
+        try {
+            validateExerciseType(workoutSession.getExerciseType());
+            validateDuration(workoutSession.getDurationInMinutes());
+            validateIntensity(workoutSession.getIntensity());
+            validateDate(workoutSession.getDate());
+        } catch (WorkoutSessionValidationException e) {
+            logger.warn("Validation failed for WorkoutSession: {}", e.getMessage());
+            throw e;
+        }
     }
 
     public void validateExerciseType(String exerciseType) {
