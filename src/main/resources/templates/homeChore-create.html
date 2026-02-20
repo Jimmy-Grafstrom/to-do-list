@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create chore</title>
+</head>
+<body>
+<h1>Create new chore</h1>
+<form th:action="@{/homeChore-list}" th:object="${chore}" method="post">
+
+    <label>Chore</label>
+    <input type="text" th:field="*{chore}"/>
+    <br><br>
+
+    <label>Room</label>
+    <input type="text" th:field="*{room}"/>
+    <br><br>
+
+    <label>Important</label>
+    <input type="text" th:field="*{important}"/>
+    <br><br>
+
+    <label>Estimated time</label>
+    <input type="text" th:field="*{estimatedTime}"/>
+    <br><br>
+
+    <button type="submit">Save</button>
+</form>
+<a th:href="@{/homeChore-list}">Back to list of all chores</a>
+
+</body>
+</html>
