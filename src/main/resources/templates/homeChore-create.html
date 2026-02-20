@@ -9,19 +9,19 @@
 <form th:action="@{/chores}" th:object="${chore}" method="post">
 
     <label>Chore</label>
-    <input type="text" th:field="*{chore}"/>
+    <input type="text" th:field="*{chore}" required/>
     <br><br>
 
     <label>Room</label>
-    <input type="text" th:field="*{room}"/>
+    <input type="text" th:field="*{room}" required/>
     <br><br>
 
     <label>Important</label>
-    <input type="text" th:field="*{important}"/>
+    <input type="checkbox" th:field="*{important}"/>
     <br><br>
 
     <label>Estimated time</label>
-    <input type="text" th:field="*{estimatedTime}"/>
+    <input type="text" th:field="*{estimatedTime}" required min="1" max="60"/>
     <br><br>
 
     <button type="submit">Save</button>
