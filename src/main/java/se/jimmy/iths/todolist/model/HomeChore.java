@@ -1,9 +1,6 @@
 package se.jimmy.iths.todolist.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class HomeChore {
@@ -14,6 +11,8 @@ public class HomeChore {
     private String chore;
     private String room;
     private boolean important;
+
+    @Column(name = "estimated_time")
     private int estimatedTime;
 
     public HomeChore() {}
