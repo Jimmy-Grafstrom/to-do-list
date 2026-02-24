@@ -3,5 +3,5 @@ CREATE TABLE home_chore (
     chore VARCHAR(255) NOT NULL,
     room VARCHAR(255) NOT NULL,
     important BOOLEAN NOT NULL DEFAULT FALSE,
-    estimated_time INT NOT NULL
+    estimated_time INTEGER NOT NULL
 );
