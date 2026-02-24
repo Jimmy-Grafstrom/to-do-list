@@ -48,7 +48,7 @@ public class StudyplanValidator {
 
     public void validateDateOrder(LocalDate startdate, LocalDate deadline) {
         if (startdate != null && deadline != null && deadline.isBefore(startdate)) {
-            throw new  StudyplanValidationException("Deadline should be before start date");
+            throw new  StudyplanValidationException("Deadline should be after start date");
         }
     }
 

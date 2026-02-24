@@ -50,7 +50,7 @@ public class StudyplanController {
         return "redirect:/studyplan";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     public String deleteStudyplan(@PathVariable Long id) {
         studyplanService.deleteStudyplanById(id);
         return "redirect:/studyplan";
